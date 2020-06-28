@@ -1,59 +1,31 @@
 import 'package:favorcate/core/model/category_model.dart';
-
 import '../../../core/services/json_parse.dart';
 import 'package:flutter/material.dart';
 import 'package:favorcate/core/extension/int_extension.dart';
-class HYHomeContent extends StatefulWidget {
-  @override
-  _HYHomeContentState createState() => _HYHomeContentState();
-}
-
-class _HYHomeContentState extends State<HYHomeContent> {
-  List<HYCategoryModel> _categories = [];
-  @override
-  void initState() {
-    super.initState();
-    print('----------');
-    // 加载数据
-    JsonParse.getCategoryData().then((value) {
-      setState(() {
-        _categories = value;
-      });
-    });
-  }
+import 'home_category_item.dart';
+class HYHomeContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      padding: EdgeInsets.all(20.px),
-      itemCount: _categories.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 20.px,
-        mainAxisSpacing: 20.px,
-        childAspectRatio: 1.5
-      ),
-      itemBuilder: (ctx, index) {
-        final bgColor = _categories[index].cColor;
-        return Container(
-          decoration: BoxDecoration(
-            color: bgColor,
-            borderRadius: BorderRadius.circular(12),
-              gradient: LinearGradient(
-              colors: [
-                bgColor.withOpacity(.5),
-                bgColor
-              ]
-            )
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            _categories[index].title,
-            style: Theme.of(context).textTheme.display2.copyWith(
-              fontWeight: FontWeight.bold
+    return FutureBuilder<List<HYCategoryModel>>(
+      future: HYJsonParse.getCategoryData(),  // 发送的异步请求
+      builder: (ctx, snapshot) {
+        if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
+        if (snapshot.error != null) return Center(child: Text("请求失败"),);
+        final categories = snapshot.data;
+        return GridView.builder(
+            padding: EdgeInsets.all(20.px),
+            itemCount: categories.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 20.px,
+                mainAxisSpacing: 20.px,
+                childAspectRatio: 1.5
             ),
-          )
+            itemBuilder: (ctx, index) {
+              return HomeCateGoryItem(categories[index]);
+            }
         );
-      }
+      },
     );
   }
 }
