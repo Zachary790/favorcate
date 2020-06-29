@@ -10,6 +10,7 @@ class HYAppTheme {
 
   static final ThemeData norTheme = ThemeData(
     primarySwatch: Colors.pink,
+    accentColor: Colors.amber,
     canvasColor: Color.fromRGBO(255, 254, 222, 1),
     textTheme: TextTheme(
       body1: TextStyle(fontSize: bodyFontSize, color: Colors.black87),
