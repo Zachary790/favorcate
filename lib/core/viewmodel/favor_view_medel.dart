@@ -1,23 +1,20 @@
 import 'package:favorcate/core/model/meal_model.dart';
-import 'package:flutter/material.dart';
+import 'package:favorcate/core/viewmodel/base_view_model.dart';
 
-class HYFavorViewModel extends ChangeNotifier {
-  List<HYMealModel> _favorMeals = [];
-
-  List<HYMealModel> get favorMeals => _favorMeals;
+class HYFavorViewModel extends BaseMealViewModel {
 
   void addMeal(HYMealModel meal){
-    _favorMeals.add(meal);
+    originMeals.add(meal);
     notifyListeners();
   }
 
   void removeMeal(HYMealModel meal) {
-    _favorMeals.remove(meal);
+    originMeals.remove(meal);
     notifyListeners();
   }
 
   bool isFavor(HYMealModel meal) {
-    return _favorMeals.contains(meal);
+    return originMeals.contains(meal);
   }
 
   void handleMeal(HYMealModel meal) {

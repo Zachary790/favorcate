@@ -1,4 +1,5 @@
 import 'package:favorcate/ui/pages/detail/detail.dart';
+import 'package:favorcate/ui/pages/filter/filter.dart';
 import 'package:favorcate/ui/pages/meal/meal.dart';
 import 'package:flutter/material.dart';
 import '../../ui/pages/main/main.dart';
@@ -11,6 +12,14 @@ class HYRouter {
   };
 
   static final RouteFactory generateRoute = (setting) {
+    if (setting.name == HYFilterScreen.routeName){
+      return MaterialPageRoute(
+        builder: (ctx) {
+          return HYFilterScreen();
+        },
+        fullscreenDialog: true
+      );
+    }
     return null;
   };
 

@@ -1,3 +1,4 @@
+import 'package:favorcate/ui/pages/home/home_drawer.dart';
 import 'package:flutter/material.dart';
 import 'initiallze_items.dart';
 class HYMainScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class _HYMainScreenState extends State<HYMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: HYHomeDrawer(),
       body: IndexedStack(
         index: _currentIndex,
         children: pages,

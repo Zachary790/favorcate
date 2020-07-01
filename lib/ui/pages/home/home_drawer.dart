@@ -1,3 +1,4 @@
+import 'package:favorcate/ui/pages/filter/filter.dart';
 import 'package:flutter/material.dart';
 import 'package:favorcate/core/extension/int_extension.dart';
 class HYHomeDrawer extends StatelessWidget {
@@ -12,7 +13,9 @@ class HYHomeDrawer extends StatelessWidget {
             buildListTile(context, Icon(Icons.restaurant), "进餐", () {
               Navigator.of(context).pop();
             }),
-            buildListTile(context, Icon(Icons.settings), "过滤", () {}),
+            buildListTile(context, Icon(Icons.settings), "过滤", () {
+              Navigator.of(context).pushNamed(HYFilterScreen.routeName);
+            }),
           ],
         ),
       ),
